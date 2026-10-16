@@ -68,6 +68,7 @@
     "eslint": "catalog:eslint",
     "eslint-plugin-antfu": "catalog:eslint",
     "https-localhost": "catalog:utils",
+    "sharp": "catalog:utils",
     "taze": "catalog:utils",
     "typescript": "catalog:typescript",
     "unocss": "catalog:utils",
