@@ -8,12 +8,12 @@
 <h1 align="center">PWA Ecosystem Documentation</h1>
 
 <p align='center'>
-<a href="https://vite-pwa-org.netlify.app/" target="__blank">
+<a href="https://unplugin-pwa.netlify.app/" target="__blank">
     <img src="https://img.shields.io/static/v1?label=&message=docs%20%26%20guides&color=2e859c" alt="Documentation & Guides">
 </a>
 <br>
-<a href="https://github.com/antfu/vite-plugin-pwa" target="__blank">
-<img alt="GitHub stars" src="https://img.shields.io/github/stars/vite-pwa/vite-pwa-docs?style=social">
+<a href="https://github.com/vite-pwa/unplugin-pwa-docs" target="__blank">
+<img alt="GitHub stars" src="https://img.shields.io/github/stars/vite-pwa/unplugin-pwa-docs?style=social">
 </a>
 </p>
 
