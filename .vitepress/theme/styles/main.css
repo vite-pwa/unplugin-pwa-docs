@@ -1,0 +1,383 @@
+/* show/hide PWA icon in navbar */
+.dark [img-light],
+.dark .logo[light-logo] {
+  display: none;
+}
+html:not(.dark) [img-dark],
+html:not(.dark) .logo[dark-logo] {
+  display: none;
+}
+
+/* Overrides */
+.VPBadge {
+  transform: translateY(-6px);
+}
+sup.VPBadgeCustom {
+  display: inline-block;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  padding: 0 10px;
+  line-height: 20px;
+  font-size: 10px;
+  font-weight: 500;
+  transform: translateY(-6px);
+}
+sup.VPBadgeCustom.tip {
+  border-color: var(--vp-badge-tip-border);
+  color: var(--vp-badge-tip-text);
+  background-color: var(--vp-badge-tip-bg);
+}
+.VPSocialLink {
+  transform: scale(0.9);
+}
+
+.VPSidebarItem.has-active > .item > .caret {
+  display: none;
+}
+
+/* h3 breaks SEO => replaced with h2 with the same size */
+.home-content h2 {
+  margin-top: 2rem;
+  font-size: 1.35rem;
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+img.resizable-img {
+  width: unset;
+  height: unset;
+}
+
+.dark .prompt-img {
+  filter: invert(86%);
+}
+
+.tagline {
+  white-space: pre-wrap;
+}
+
+details > summary:hover {
+  cursor: pointer;
+  user-select: none;
+}
+
+.custom-block.tip code,
+.custom-block.info code,
+.custom-block.warning code,
+.custom-block.danger code {
+  font-size: var(--vp-custom-block-code-font-size);
+  font-weight: 700;
+}
+
+.info.custom-block > p > code,
+.info.custom-block > p > a,
+.info.custom-block > p > a:hover {
+  color: var(--vp-c-text-2);
+  opacity: 1;
+}
+.tip.custom-block > p > code,
+.tip.custom-block > p > a,
+.tip.custom-block > p > a:hover {
+  color: var(--vp-c-brand-1);
+  opacity: 1;
+}
+.warning.custom-block > p > code,
+.warning.custom-block > p > a,
+.warning.custom-block > p > a:hover {
+  color: var(--vp-c-warning-1);
+  opacity: 1;
+}
+.danger.custom-block > p > code,
+.danger.custom-block > p > a,
+.danger.custom-block > p > a:hover {
+  color: var(--vp-c-danger-1);
+  opacity: 1;
+}
+
+.custom-block.warning code,
+.custom-block.danger code {
+  font-size: var(--vp-custom-block-code-font-size);
+  font-weight: 700;
+}
+
+/* sp-link:hover on dark */
+.dark .VPLink.sp-link:hover {
+  background-color: #d51a6d !important;
+}
+
+/* PWA: Prompt for Update */
+.pwa-toast .pwa-refresh {
+  border-color: var(--vp-button-brand-border);
+  color: var(--vp-button-brand-text);
+  background-color: var(--vp-button-brand-bg);
+}
+.pwa-toast .pwa-refresh:hover {
+  border-color: var(--vp-button-brand-hover-border);
+  color: var(--vp-button-brand-hover-text);
+  background-color: var(--vp-button-brand-hover-bg);
+}
+.pwa-toast .pwa-refresh:active {
+  border-color: var(--vp-button-brand-active-border);
+  color: var(--vp-button-brand-active-text);
+  background-color: var(--vp-button-brand-active-bg);
+}
+.pwa-toast .pwa-cancel {
+  border-color: var(--vp-button-alt-border);
+  color: var(--vp-button-alt-text);
+  background-color: var(--vp-button-alt-bg);
+}
+.pwa-toast .pwa-cancel:hover {
+  border-color: var(--vp-button-alt-hover-border);
+  color: var(--vp-button-alt-hover-text);
+  background-color: var(--vp-button-alt-hover-bg);
+}
+.pwa-toast .pwa-cancel:active {
+  border-color: var(--vp-button-alt-active-border);
+  color: var(--vp-button-alt-active-text);
+  background-color: var(--vp-button-alt-active-bg);
+}
+
+/* code block with pre padding */
+.vp-doc :not(pre) > code {
+  padding: 1px 6px;
+}
+
+/* Team member media queries */
+/* fix height ~ 2 lines of text: 3 cards per row */
+.VPTeamMembersItem.medium .profile .data .affiliation {
+  min-height: 3rem;
+}
+.VPTeamMembersItem.medium .profile .data .desc {
+  min-height: 3rem;
+}
+
+/* fix height ~ 2 lines of text: 3 cards per row */
+@media (min-width: 1009px) {
+  .VPTeamMembersItem.medium .profile .data .affiliation {
+    min-height: 4rem;
+  }
+  .VPTeamMembersItem.medium .profile .data .desc {
+    min-height: 4rem;
+  }
+}
+/* fix height ~ 2 lines of text: 2 cards per row */
+@media (min-width: 697px) and (max-width: 985px) {
+  .VPTeamMembersItem.medium .profile .data .affiliation {
+    min-height: 4rem;
+  }
+  .VPTeamMembersItem.medium .profile .data .desc {
+    min-height: 4rem;
+  }
+}
+/* fix height: one card per row */
+@media (max-width: 696px) {
+  .VPTeamMembersItem.medium .profile .data .affiliation {
+    min-height: unset;
+  }
+  .VPTeamMembersItem.medium .profile .data .desc {
+    min-height: unset;
+  }
+}
+
+/* Excalidraw SVG colors */
+/* Vite purple color */
+html:not(.dark) svg g > text[fill="#646cff"] {
+  fill: #5d65ee;
+}
+html.dark svg g > text[fill="#646cff"] {
+  fill: #6d75ff;
+}
+/* Vite circles */
+html:not(.dark) svg g[stroke-linecap="round"] > path[stroke="#646cff"] {
+  stroke: #5d65ee;
+}
+html.dark svg g[stroke-linecap="round"] > path[stroke="#646cff"] {
+  stroke: #6d75ff;
+}
+/* Vite green text */
+html:not(.dark) svg g > text[fill="#2f9e44"] {
+  fill: #28863a;
+}
+/* Vite green rectangle */
+html:not(.dark) svg g[stroke-linecap="round"] > path[stroke="#2f9e44"] {
+  stroke: #28863a;
+}
+/* Vite plugins rectangle */
+html.dark svg g[stroke-linecap="round"] > path[stroke="#1e1e1e"] {
+  stroke: #fff;
+}
+/* Rollup links */
+html.dark svg g > text[fill="#e03131"] {
+  fill: #f93636;
+}
+/* Rollup circles */
+html.dark svg g[stroke-linecap="round"] > path[stroke="#e03131"] {
+  stroke: #f93636;
+}
+/* PWA blue color */
+svg g > text[fill="#35849a"] {
+  fill: var(--vp-c-brand-1);
+}
+/* PWA circles and arrows */
+svg g[stroke-linecap="round"] > path[stroke="#35849a"],
+svg g[stroke-linecap="round"] > g > path[stroke="#35849a"] {
+  stroke: var(--vp-c-brand-1);
+}
+/* workbox rectangle */
+html:not(.dark) svg g[stroke-linecap="round"] > path[stroke="#f08c00"],
+/* workbox arrows */
+html:not(.dark) svg g[stroke-linecap="round"] > g > path[stroke="#f08c00"],
+/* workbox circles */
+html:not(.dark) svg g[stroke-linecap="round"] > path[stroke="#fa903e"] {
+  stroke: #ab6400;
+}
+/* workbox text */
+html:not(.dark) svg g > text[fill="#f08c00"],
+html:not(.dark) svg g > text[fill="#fa903e"] {
+  fill: #ab6400;
+}
+/* vertical black lines */
+html.dark svg g[stroke-linecap="round"] > g[transform] > path[stroke="#1e1e1e"] {
+  stroke: #fff;
+}
+
+/* ============================================================
+   Symbol table → vertical cards (stacked rows) + clickable
+   ============================================================ */
+
+/* 1. Table as block container */
+.vp-doc table.symbol-table {
+  display: block;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* 2. Hide the default header */
+.vp-doc table.symbol-table thead {
+  display: none;
+}
+
+.vp-doc table.symbol-table tbody {
+  display: block;
+  width: 100%;
+}
+
+/* 3. Each row = a card with relative positioning for the overlay */
+.vp-doc table.symbol-table tbody tr {
+  display: block;
+  position: relative;         /* for the link overlay */
+  margin-bottom: 1rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 8px;
+  background: var(--vp-c-bg-soft);
+  transition: border-color 0.2s, box-shadow 0.2s;
+  cursor: pointer;            /* visual feedback */
+}
+
+.vp-doc table.symbol-table tbody tr:hover {
+  border-color: var(--vp-c-brand);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* 4. Each cell = block (vertical stacking) */
+.vp-doc table.symbol-table tbody td {
+  display: block;
+  padding: 0.3rem 0;
+  border: none;
+  position: relative;        /* ensure content is above overlay */
+  z-index: 1;
+}
+
+/* 5. The label – bold, block‑level, on its own line */
+.vp-doc table.symbol-table tbody td::before {
+  content: attr(data-label);
+  display: block;
+  font-weight: 600;
+  font-size: 0.8rem;
+  color: var(--vp-c-text-2);
+  margin-bottom: 0.1rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+/* 6. The actual content – takes full width */
+.vp-doc table.symbol-table tbody td > * {
+  display: block;
+  width: 100%;
+}
+
+/* 7. Description wraps and fills the card */
+.vp-doc table.symbol-table tbody td[data-label="Description"] {
+  word-break: break-word;
+  line-height: 1.5;
+}
+
+/* 8. The link inside the first cell – we hide it visually but keep it clickable,
+      and use its `::after` to cover the whole card. */
+.vp-doc table.symbol-table tbody td:first-child a {
+  display: block;            /* makes the link take the full width of the cell */
+  color: var(--vp-c-brand);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+/* The pseudo‑element creates an invisible overlay that covers the entire card */
+.vp-doc table.symbol-table tbody td:first-child a::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;               /* behind the cell content (z-index:1) */
+  cursor: pointer;
+}
+
+/* Ensure the link text remains clickable (for accessibility) */
+.vp-doc table.symbol-table tbody td:first-child a {
+  position: relative;
+  z-index: 2;               /* above the overlay so the text can be selected */
+}
+
+/* If you want to style list items as cards (for functions, type aliases) */
+.vp-doc ul.api {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.vp-doc ul.api li {
+  display: inline-flex;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 8px;
+  background: var(--vp-c-bg-soft);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.vp-doc ul.api li:hover {
+  border-color: var(--vp-c-brand);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+.vp-doc ul.api li a {
+  display: block; /* makes the whole <li> clickable if you wrap the <a> around it? But you can't change the HTML easily */
+  /* Actually, you'd need to make the <a> fill the <li> */
+}
+
+.symbol-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+}
+.symbol-table th,
+.symbol-table td {
+  border: 1px solid var(--vp-c-divider);
+  padding: 0.6rem 1rem;
+  text-align: left;
+}
+.symbol-table th {
+  background-color: var(--vp-c-bg-soft);
+  font-weight: 600;
+}
+

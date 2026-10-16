@@ -1,0 +1,9 @@
+node_modules
+.DS_Store
+dist
+# intellij stuff
+.idea/
+.vitepress/cache/
+.vitepress/dist/
+vite-pwa-workbox/api/packages/
+vite-pwa-workbox/api/symbols/

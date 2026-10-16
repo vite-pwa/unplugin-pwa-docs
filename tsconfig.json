@@ -1,0 +1,34 @@
+{
+  "compilerOptions": {
+    "incremental": false,
+    "target": "ESNext",
+    "lib": ["DOM", "ESNext"],
+    "baseUrl": ".",
+    "module": "esnext",
+    "moduleResolution": "Bundler",
+    "paths": {
+      "~/*": ["src/*"]
+    },
+    "resolveJsonModule": true,
+    "types": [
+      "@types/fs-extra",
+      "node",
+      "vite/client",
+      "@unplugin-pwa/core/vanillajs",
+      "vitepress"
+    ],
+    "allowImportingTsExtensions": true,
+    "strict": true,
+    "strictNullChecks": true,
+    "noUnusedLocals": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true
+  },
+  "include": [
+    "./*.ts",
+    "./.vitepress/**/*.ts",
+    "./.vitepress/**/*.vue"
+  ],
+  "exclude": ["dist", "node_modules"]
+}

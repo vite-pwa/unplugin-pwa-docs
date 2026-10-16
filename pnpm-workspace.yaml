@@ -1,0 +1,92 @@
+autoInstallPeers: true
+
+blockExoticSubdeps: false
+
+catalogMode: prefer
+
+dedupePeers: true
+
+ignoreScripts: true
+
+ignoreWorkspaceRootCheck: true
+
+peerDependencyRules:
+  ignoreMissing:
+    - '@algolia/client-search'
+
+verifyDepsBeforeRun: install
+
+shamefullyHoist: true
+
+shellEmulator: true
+
+strictPeerDependencies: false
+
+trustPolicy: no-downgrade
+
+overrides:
+  '@types/node': 'catalog:types'
+  sharp: ^0.35.5
+  vue: 3.5.43
+
+allowBuilds:
+  '@parcel/watcher': false
+  '@sentry/cli': true
+  core-js: false
+  esbuild: false
+  sharp: true
+  unrs-resolver: false
+  vue-demi: false
+
+catalogs:
+  eslint:
+    '@antfu/eslint-config': ^9.5.1
+    eslint: ^10.12.0
+    eslint-plugin-antfu: ^3.2.3
+
+  pwa:
+    '@unplugin-pwa/core': https://pkg.pr.new/@unplugin-pwa/core@d404f04
+    '@unplugin-pwa/inspector': https://pkg.pr.new/@unplugin-pwa/inspector@d404f04
+    '@unplugin-pwa/types': https://pkg.pr.new/@unplugin-pwa/types@d404f04
+    '@unplugin-pwa/vite': https://pkg.pr.new/@unplugin-pwa/vite@d404f04
+    '@vite-pwa/assets-generator': ^2.0.0
+    '@vite-pwa/workbox-build': ^8.0.12
+    '@vite-pwa/workbox-swkit': ^8.0.12
+    '@vite-pwa/workbox-types': ^8.0.12
+    '@vite-pwa/workbox-window': ^8.0.12
+  types:
+    '@types/node': 24.19.1
+  typescript:
+    typescript: ~6.0.3
+  utils:
+    '@antfu/ni': ^25.0.0
+    '@vueuse/core': ^15.0.0
+    '@vueuse/shared': ^15.0.0
+    https-localhost: 4.7.2
+    taze: 21.1.0
+    unocss: ^66.11.0
+    unplugin-vue-components: ^32.1.0
+    vitepress: https://pkg.pr.new/vitepress@16c020d
+    vitepress-plugin-group-icons: ^1.7.7
+    vitepress-plugin-llms: ^1.14.0
+  vite:
+    vite: ^8.3.4
+  vue:
+    '@vitejs/plugin-vue': ^6.0.10
+    vue: 3.5.43
+    vue-tsc: ^3.3.12
+
+minimumReleaseAgeExclude:
+  - '@vite-pwa/workbox-build'
+  - '@vite-pwa/workbox-swkit'
+  - '@vite-pwa/workbox-window'
+  - '@vite-pwa/workbox-types@8.0.12'
+
+supportedArchitectures:
+  os:
+    - win32
+    - darwin
+    - current
+  cpu:
+    - x64
+    - arm64
