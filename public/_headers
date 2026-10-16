@@ -18,7 +18,7 @@
   X-Frame-Options: DENY
   X-XSS-Protection: 1; mode=block
 
-/workbox/
+/vite-pwa-workbox/
   X-Frame-Options: DENY
   X-XSS-Protection: 1; mode=block
 
