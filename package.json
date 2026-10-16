@@ -35,6 +35,8 @@
     "nuxt module"
   ],
   "scripts": {
+    "generate-avatars": "node scripts/prepare-avatars.mts",
+    "generate-og-image": "node scripts/prepare-og-image.mts",
     "gen-workbox-api": "node gen-workbox-api-pages.ts",
     "dev": "pnpm gen-workbox-api && vitepress dev",
     "build": "pnpm gen-workbox-api && vitepress build",
@@ -66,6 +68,7 @@
     "eslint": "catalog:eslint",
     "eslint-plugin-antfu": "catalog:eslint",
     "https-localhost": "catalog:utils",
+    "sharp": "catalog:utils",
     "taze": "catalog:utils",
     "typescript": "catalog:typescript",
     "unocss": "catalog:utils",

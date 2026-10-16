@@ -248,7 +248,7 @@ catalogs:
 
 overrides:
   '@types/node': 24.19.1
-  sharp: ^0.35.5
+  sharp: 0.35.5
   vue: 3.5.43
 
 importers:
@@ -313,6 +313,9 @@ importers:
       https-localhost:
         specifier: catalog:utils
         version: 4.7.2
+      sharp:
+        specifier: 0.35.5
+        version: 0.35.5(@types/node@24.19.1)
       taze:
         specifier: catalog:utils
         version: 21.1.0
