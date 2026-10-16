@@ -1,6 +1,7 @@
 import type { VitePWAStrategy } from '@unplugin-pwa/core'
 import type { SWType } from '@vite-pwa/workbox-build/types'
 import type { PwaOptions } from '../with-pwa/types.ts'
+import { ogImagePWA } from '../constants.ts'
 
 function definePwaConfig<
   UserStrategy extends VitePWAStrategy,
@@ -19,6 +20,25 @@ export const pwa = definePwaConfig({
   includeManifestScreenshots: false,
   swType: 'classic-and-module',
   strategies: 'build-sw',
+  buildSW: {
+    inlineWorkboxRuntime: false,
+    workboxRuntimeCompatible: false,
+    swSrc: '.vitepress/sw.ts',
+    globPatterns: [
+      '**/*.{css,js,html,svg,png,webp,ico,txt,woff2,json,excalidraw}',
+    ],
+    globIgnores: [
+      'shortcuts/*.svg',
+      'unplugin-pwa/api/symbols/**',
+      'unplugin-pwa/api/packages/**',
+      'assets/unplugin-pwa_api_packages_*',
+      'assets/unplugin-pwa_api_symbols_*',
+      'vite-pwa-workbox/api/packages/**',
+      'vite-pwa-workbox/api/symbols/**',
+      'assets/vite-pwa-workbox_api_packages_*',
+      'assets/vite-pwa-workbox_api_symbols_*',
+    ],
+  },
   manifest: {
     id: '/',
     name: 'PWA Ecosystem',
@@ -57,9 +77,10 @@ export const pwa = definePwaConfig({
       },
     ],
     screenshots: [{
-      src: 'og-image.png',
+      src: ogImagePWA,
       sizes: '1200x630',
-      type: 'image/png',
+      type: 'image/webp',
+      form_factor: 'wide',
       label: 'Screenshot of PWA Ecosystem',
     }],
     shortcuts: [{
@@ -115,24 +136,5 @@ export const pwa = definePwaConfig({
     edge_side_panel: {
       preferred_width: 480,
     },
-  },
-  buildSW: {
-    inlineWorkboxRuntime: false,
-    workboxRuntimeCompatible: false,
-    swSrc: '.vitepress/sw.ts',
-    globPatterns: [
-      '**/*.{css,js,html,svg,png,webp,ico,txt,woff2,json,excalidraw}',
-    ],
-    globIgnores: [
-      'shortcuts/*.svg',
-      'unplugin-pwa/api/symbols/**',
-      'unplugin-pwa/api/packages/**',
-      'assets/unplugin-pwa_api_packages_*',
-      'assets/unplugin-pwa_api_symbols_*',
-      'vite-pwa-workbox/api/packages/**',
-      'vite-pwa-workbox/api/symbols/**',
-      'assets/vite-pwa-workbox_api_packages_*',
-      'assets/vite-pwa-workbox_api_symbols_*',
-    ],
   },
 })
