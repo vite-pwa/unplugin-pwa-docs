@@ -3,6 +3,7 @@ import { useOnline } from '@vueuse/core'
 import { inBrowser, useData, useRoute, useRouter } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
 import { onMounted, shallowRef, watch } from 'vue'
+import { API_PAGE_REGEX } from '../pages.ts'
 import HomePage from './components/HomePage.vue'
 import NotFound from './components/NotFound.vue'
 import OfflineToast from './components/OfflineToast.vue'
@@ -57,6 +58,14 @@ watch(() => [
     }
     // don't clean up the offline page if we are online or if the page is not a 404
     // if 404 and the client becomes online the 404 page will change the try again button text and link
+    return
+  }
+  // check first if the client visit api page when offline for first time (md.js page is not found):
+  // api page at browser url but is404 is true
+  // should show the same 404 page if the HTML page is refreshed without retry button
+  if (API_PAGE_REGEX.test(path)) {
+    apiPageOfflineRetry.value = false
+    apiPageOffline.value = path
     return
   }
   let url = new URL(path, window.location.origin)
