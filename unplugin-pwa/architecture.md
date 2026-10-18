@@ -7,6 +7,9 @@ aside: false
 
 ```mermaid
 flowchart LR
+    accTitle: Architecture Diagram of Unplugin PWA Ecosystem
+    accDescr: Flowchart illustrating how external consumers like Nuxt and Vanilla Vite interact with the unplugin-pwa adapters, which in turn use the core module and workbox-build to generate PWA assets.
+
 %% External Consumers
     Nuxt("<div style='padding: 10px 15px;'>Framework<br>(e.g., Nuxt)</div>")
     Vanilla("<div style='padding: 10px 15px;'>Vanilla Vite</div>")
@@ -57,6 +60,8 @@ flowchart LR
 
 ```mermaid
 sequenceDiagram
+    accTitle: Vanilla Vite Lifecycle Execution Flow
+    accDescr: Sequence diagram detailing the three phases of the Vanilla Vite lifecycle for PWA generation: Configuration and Facade Initialization, Context Enrichment, and Build Execution via workbox-build.
     autonumber
     actor Dev as User
     participant Config as vite.config.ts
@@ -107,6 +112,8 @@ sequenceDiagram
 
 ```mermaid
 sequenceDiagram
+    accTitle: Nuxt and Vite Lifecycle Execution Flow
+    accDescr: Sequence diagram showing the event-driven phases in Nuxt: Context Creation and Hook Registration, Nitro Initialization, Vite Plugin Registration, and asynchronous PWA Generation.
     autonumber
     participant Setup as 📦 @vite-pwa/nuxt
     participant Core as 📦 @unplugin-pwa/core
