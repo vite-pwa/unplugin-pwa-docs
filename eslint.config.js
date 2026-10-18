@@ -32,6 +32,7 @@ export default antfu(
       '**/*.md/*.yml',
       '**/*.md/*.yaml',
       '**/*.md/*.svelte',
+      'pnpm-workspace.yaml',
     ],
   },
   {

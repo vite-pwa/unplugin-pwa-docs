@@ -37,9 +37,9 @@
   "scripts": {
     "generate-avatars": "node scripts/prepare-avatars.mts",
     "generate-og-image": "node scripts/prepare-og-image.mts",
-    "gen-workbox-api": "node gen-workbox-api-pages.ts",
-    "dev": "pnpm gen-workbox-api && vitepress dev",
-    "build": "pnpm gen-workbox-api && vitepress build",
+    "gen-api-pages": "node scripts/gen-api-pages.ts",
+    "dev": "pnpm gen-api-pages && vitepress dev",
+    "build": "pnpm gen-api-pages && vitepress build",
     "preview": "nr build && vitepress serve",
     "https": "nr build && serve .vitepress/dist",
     "lint": "eslint .",

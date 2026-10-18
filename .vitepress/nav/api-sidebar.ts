@@ -1,5 +1,5 @@
-import type { PackageGroup } from '../../generate.ts'
-import { getPackages, slugify } from '../../generate.ts'
+import type { PackageGroup } from '../../scripts/generate.ts'
+import { getPackages, slugify } from '../../scripts/generate.ts'
 
 /**
  * Build a JavaDoc-style sidebar tree.
@@ -10,7 +10,7 @@ import { getPackages, slugify } from '../../generate.ts'
  * The root module (module === "") is NOT shown as a separate subpackage item
  * because the top-level link already points to the package index page.
  */
-export function workboxApiSidebar() {
+export function apiSidebar() {
   const packages = getPackages()
 
   // Group packages by top-level name
@@ -24,11 +24,25 @@ export function workboxApiSidebar() {
 
   // const link = (s: ApiSymbol) => ({ text: s.name, link: `/api/symbols/${s.slug}` })
 
+  const getPkgName = (pkgName: string): string => {
+    const replace = pkgName.startsWith('workbox-')
+      ? ''
+      : pkgName.startsWith('unplugin-pwa-')
+        ? 'unplugin-pwa-'
+        : ''
+    const prefix = pkgName.startsWith('workbox-')
+      ? '@vite-pwa/'
+      : pkgName.startsWith('unplugin-pwa-')
+        ? '@unplugin-pwa/'
+        : ''
+    return replace ? `${prefix}${pkgName.replace(replace, '')}` : `${prefix}${pkgName}`
+  }
+
   return [...topLevel.entries()]
     .sort((a, b) => a[0].localeCompare(b[0]))
     .map(([pkgName, subPackages]) => ({
-      text: pkgName,
-      link: `/vite-pwa-workbox/api/packages/${slugify(pkgName, 'index')}`,
+      text: getPkgName(pkgName),
+      link: `/api/packages/${slugify(pkgName, 'index')}`,
       collapsed: true,
       // Exclude root (module="") from subpackage items — the top-level link
       // already goes to the root index page. Only show non-root subpackages.
@@ -36,7 +50,7 @@ export function workboxApiSidebar() {
         .filter(sp => sp.module !== '')
         .map(sp => ({
           text: sp.module,
-          link: `/vite-pwa-workbox/api/packages/${sp.slug}`,
+          link: `/api/packages/${sp.slug}`,
           collapsed: true,
           // items: sp.symbols
           //   .sort((a, b) => a.kindLabel.localeCompare(b.kindLabel) || a.name.localeCompare(b.name))

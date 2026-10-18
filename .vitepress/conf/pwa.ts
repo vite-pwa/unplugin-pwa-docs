@@ -1,18 +1,7 @@
-import type { VitePWAStrategy } from '@unplugin-pwa/core'
-import type { SWType } from '@vite-pwa/workbox-build/types'
-import type { PwaOptions } from '../with-pwa/types.ts'
 import { ogImagePWA } from '../constants.ts'
+import { definePwaConfig } from '../with-pwa/config.ts'
 
-function definePwaConfig<
-  UserStrategy extends VitePWAStrategy,
-  T extends SWType,
->(
-  config: Partial<PwaOptions<UserStrategy, T>>,
-): Partial<PwaOptions<UserStrategy, T>> {
-  return config
-}
-
-export const pwa = definePwaConfig({
+export default definePwaConfig({
   outDir: '.vitepress/dist',
   registerType: 'prompt',
   includeManifestIcons: false,
@@ -29,14 +18,10 @@ export const pwa = definePwaConfig({
     ],
     globIgnores: [
       'shortcuts/*.svg',
-      'unplugin-pwa/api/symbols/**',
-      'unplugin-pwa/api/packages/**',
-      'assets/unplugin-pwa_api_packages_*',
-      'assets/unplugin-pwa_api_symbols_*',
-      'vite-pwa-workbox/api/packages/**',
-      'vite-pwa-workbox/api/symbols/**',
-      'assets/vite-pwa-workbox_api_packages_*',
-      'assets/vite-pwa-workbox_api_symbols_*',
+      'api/symbols/**',
+      'api/packages/**',
+      'assets/api_packages_*',
+      'assets/api_symbols_*',
     ],
   },
   manifest: {

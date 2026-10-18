@@ -1,6 +1,8 @@
 ---
 title: FAQ | Guide
-next: Getting Started | PWA Assets Generator
+next: 
+  text: Getting Started | Unplugin PWA
+  link: /unplugin-pwa/
 ---
 
 # FAQ
@@ -79,7 +81,7 @@ injectManifest: {
 ## Exclude routes
 
 > [!WARNING]
-> **Work In Progress (WIP): REPLACE LINKS HERE **
+> **Work In Progress (WIP): REPLACE LINKS HERE**
 
 [//]: # (If you need to exclude some routes from service worker interception:)
 

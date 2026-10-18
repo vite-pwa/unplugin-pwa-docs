@@ -1,6 +1,5 @@
 import type { DefaultTheme } from 'vitepress'
-import packageJSON from '../../package.json' with { type: 'json' }
-import { workboxApiSidebar } from './workbox-sidebar-api.ts'
+import { apiSidebar } from './api-sidebar.ts'
 
 const Guide: DefaultTheme.SidebarItem[] = [
   {
@@ -263,22 +262,24 @@ const UnpluginPWA: DefaultTheme.SidebarItem[] = [
     link: '/unplugin-pwa/',
   },
   {
-    text: 'Core Package',
+    text: '@unplugin-pwa/core',
     link: '/unplugin-pwa/core',
   },
   {
-    text: 'Vite Package',
+    text: '@unplugin-pwa/vite',
     link: '/unplugin-pwa/vite',
   },
   {
-    text: 'Inspector Package',
-    link: '/unplugin-pwa/inspector',
+    text: '@unplugin-pwa/webpack',
+    link: '/unplugin-pwa/webpack',
   },
   {
-    text: 'API Reference',
-    collapsed: true,
-    link: '/unplugin-pwa/api/',
-    // items: workboxApiSidebar(),
+    text: '@unplugin-pwa/rspack',
+    link: '/unplugin-pwa/rspack',
+  },
+  {
+    text: '@unplugin-pwa/inspector',
+    link: '/unplugin-pwa/inspector',
   },
 ]
 const VitePWAWorkbox: DefaultTheme.SidebarItem[] = [
@@ -287,22 +288,35 @@ const VitePWAWorkbox: DefaultTheme.SidebarItem[] = [
     link: '/vite-pwa-workbox/',
   },
   {
-    text: 'generateSW',
-    link: '/vite-pwa-workbox/generate-sw',
-  },
-  {
-    text: 'buildSW',
-    link: '/vite-pwa-workbox/build-sw',
-  },
-  {
-    text: 'injectManifest',
-    link: '/vite-pwa-workbox/inject-manifest',
-  },
-  {
-    text: 'API Reference',
+    text: '@vite-pwa/workbox-build',
+    link: '/vite-pwa-workbox/build',
     collapsed: true,
-    link: '/vite-pwa-workbox/api/',
-    items: workboxApiSidebar(),
+    items: [
+      {
+        text: 'generateSW',
+        link: '/vite-pwa-workbox/generate-sw',
+      },
+      {
+        text: 'buildSW',
+        link: '/vite-pwa-workbox/build-sw',
+      },
+      {
+        text: 'injectManifest',
+        link: '/vite-pwa-workbox/inject-manifest',
+      },
+    ],
+  },
+  {
+    text: '@vite-pwa/workbox-cli',
+    link: '/vite-pwa-workbox/cli',
+  },
+  {
+    text: '@vite-pwa/workbox-swkit',
+    link: '/vite-pwa-workbox/swkit',
+  },
+  {
+    text: '@vite-pwa/workbox-window',
+    link: '/vite-pwa-workbox/window',
   },
 ]
 
@@ -314,6 +328,22 @@ function prepareSidebar(idx: number) {
       collapsed: true,
       link: '/guide/',
       items: Guide,
+    },
+    {
+      text: 'Unplugin PWA',
+      collapsible: true,
+      collapsed: true,
+      link: '/unplugin-pwa/',
+      activeMatch: '^/unplugin-pwa/',
+      items: UnpluginPWA,
+    },
+    {
+      text: 'Vite PWA Workbox',
+      collapsible: true,
+      collapsed: true,
+      link: '/vite-pwa-workbox/',
+      activeMatch: '^/vite-pwa-workbox/',
+      items: VitePWAWorkbox,
     },
     {
       text: 'PWA Assets Generator',
@@ -344,20 +374,11 @@ function prepareSidebar(idx: number) {
       items: Deployment,
     },
     {
-      text: 'Unplugin PWA',
+      text: 'API Reference',
       collapsible: true,
       collapsed: true,
-      link: '/unplugin-pwa/',
-      activeMatch: '^/unplugin-pwa/',
-      items: UnpluginPWA,
-    },
-    {
-      text: 'Vite PWA Workbox',
-      collapsible: true,
-      collapsed: true,
-      link: '/vite-pwa-workbox/',
-      activeMatch: '^/vite-pwa-workbox/',
-      items: VitePWAWorkbox,
+      link: '/api/',
+      items: apiSidebar(),
     },
   ].map<DefaultTheme.SidebarItem>((entry, i) => {
     if (idx === i) {
@@ -370,12 +391,13 @@ function prepareSidebar(idx: number) {
 
 export const sidebar: DefaultTheme.Sidebar = {
   '/guide/': prepareSidebar(0),
-  '/assets-generator/': prepareSidebar(1),
-  '/frameworks/': prepareSidebar(2),
-  '/examples/': prepareSidebar(3),
-  '/deployment/': prepareSidebar(4),
-  '/unplugin-pwa/': prepareSidebar(5),
-  '/vite-pwa-workbox/': prepareSidebar(6),
+  '/unplugin-pwa/': prepareSidebar(1),
+  '/vite-pwa-workbox/': prepareSidebar(2),
+  '/assets-generator/': prepareSidebar(3),
+  '/frameworks/': prepareSidebar(4),
+  '/examples/': prepareSidebar(5),
+  '/deployment/': prepareSidebar(6),
+  '/api/': prepareSidebar(7),
 }
 
 export const nav: DefaultTheme.NavItem[] = [
@@ -411,12 +433,7 @@ export const nav: DefaultTheme.NavItem[] = [
     activeMatch: '^/deployment/',
   },
   {
-    text: 'Vite PWA Workbox',
-    link: '/vite-pwa-workbox/',
-    activeMatch: '^/vite-pwa-workbox/',
-  },
-  {
-    text: `v${packageJSON.version}`,
+    text: 'PWA Ecosystem',
     items: [
       {
         text: 'Unplugin PWA',
@@ -428,6 +445,19 @@ export const nav: DefaultTheme.NavItem[] = [
           {
             text: 'Contributing',
             link: 'https://github.com/vite-pwa/unplugin-pwa/blob/main/CONTRIBUTING.md',
+          },
+        ],
+      },
+      {
+        text: 'Vite PWA Workbox',
+        items: [
+          {
+            text: 'Release Notes',
+            link: 'https://github.com/vite-pwa/vite-pwa-workbox/releases',
+          },
+          {
+            text: 'Contributing',
+            link: 'https://github.com/vite-pwa/vite-pwa-workbox/blob/main/CONTRIBUTING.md',
           },
         ],
       },
@@ -482,5 +512,10 @@ export const nav: DefaultTheme.NavItem[] = [
         ],
       },
     ],
+  },
+  {
+    text: 'API Reference',
+    link: '/api/',
+    activeMatch: '^/api/',
   },
 ]

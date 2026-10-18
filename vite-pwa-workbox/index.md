@@ -1,100 +1,58 @@
 ---
 title: Getting Started | Vite PWA Workbox
 prev:
-  text: API Reference | Unplugin PWA
-  link: /unplugin-pwa/api/
+  text: Inspector Package | Unplugin PWA
+  link: /unplugin-pwa/inspector/
 ---
 
 # Getting Started
 
-`@vite-pwa/workbox-build` a is fork of [**Goggle Workbox**](https://developer.chrome.com/docs/workbox/), it is a massive package with many modules to make service worker development more enjoyable and remove the need to deal with the low-level service worker API.
+[Vite PWA Workbox](https://github.com/vite-pwa/workbox) is a fork of [**Google Workbox**](https://developer.chrome.com/docs/workbox/) built from scratch. It is a collection of packages with modules to make progressive web app (PWA) service worker development more enjoyable and remove the need to deal with the low-level service worker API.
 
-This module is for build process purposes (a `node` module); that is, `@unplugin-pwa/vite` or other integrations, will use it to build your service-worker.
+## Requirements
 
-We focus on 3 methods of this section:
-- [generateSW](/vite-pwa-workbox/generate-sw): for generating the service worker.
-- [buildSW](/vite-pwa-workbox/build-sw): for building your custom service worker.
-- [injectManifest](/vite-pwa-workbox/inject-manifest): for when you need more control over your service worker.
+`@vite-pwa/workbox-build` and `@vite-pwa/workbox-cli` require **Node 22.14.0 or above**.
 
-## Which Mode to Use
+You need to install the following dependencies to run `@vite-pwa/workbox-cli` or use `@vite-pwa/workbox-build`:
+- Rolldown 1.0.0 or above: if you've installed Vite 8 or above, you don't need to install Rolldown as a dependency, because Vite 8 uses Rolldown; you need to install Rolldown when using Webpack, Rspack or Rsbuild.
+- `magicast` 0.5.0 or above: when using `generateSW` strategy only.
 
-### generateSW
+## Breaking Changes
 
-The `generateSW` mode creates a service worker file for you, customized via configuration options, and writes it out to disk.
+The following breaking changes were introduced in the packages:
+- `injectManifest` strategy doesn't build your service worker, `@vite-pwa/workbox-build` just injects the manifest into your service worker.
+- Removed service worker templates: consumers should use a custom service worker instead (using ESM notation).
+- Removed offline Google Analytics support.
+- `workbox-sw` not yet available (missing CDN distribution).
 
-#### When to use generateSW
-- You want to precache files.
-- You have simple runtime caching needs.
+## New Features
 
-#### When NOT to use generateSW
-- You want to use other Service Worker features (i.e. [Web Push](https://developer.mozilla.org/docs/Web/API/Push_API)).
-- You want to import additional scripts, or add additional logic for custom caching strategies.
+`@vite-pwa/workbox-build` adds these new features:
+- `buildSW` strategy: builds your service worker and injects the manifest into it when enabled.
+- Dual service worker generation, with `generateSW` and `buildSW` strategies: use `swType` option.
+- Dot `env` files support: `.env`, `.env.local`, `.env.[mode]`, `.env.[mode].local` files are supported.
+- Custom Rolldown/Vite plugins.
+- Custom logs level configuration.
+- Minify the service worker build, including comments (Rolldown options).
+- Custom code splitting chunks: now it is possible to split your service worker code into multiple chunks, not just `workbox` service worker modules.
+- New `additionalManifestEntriesGenerator` factory to allow using async generators to defer the manifest entries generation (read and calculate revision) until required.
+- `generateSW` strategy supports configuring `parallel` option to allow precaching in parallel, instead of sequentially.
+- `generateSW` strategy supports configuring `urlManipulation` option.
+- Build plugins for Vite, Webpack, Rspack and Rsbuild.
 
-### injectManifest
+`@vite-pwa/workbox-swkit/precaching` package adds these new features:
+- New `parallel` option to allow precaching in parallel, instead of sequentially.
 
-The `injectManifest` mode will generate a list of URLs to precache, and add that precache manifest to an existing service worker file.
+`@vite-pwa/workbox-window` package adds these new features:
+- Exported a new `esm-sw-detector` subpackage export to allow detecting ESM service worker support in the browser: based on [caniuse](https://caniuse.com/?search=service+worker) baseline specifications.
 
-#### When to use injectManifest
-- You want more control over your service worker.
-- You want to precache files.
-- You need to customize routing and strategies.
-- You would like to use your service worker with other platform features (i.e. [Web Push](https://developer.mozilla.org/docs/Web/API/Push_API)).
+## The Modernized Workbox Fork (Powered by Rolldown Everywhere)
 
-#### When NOT to use injectManifest
-- You want the easiest path to adding a service worker to your site.
+The legacy Workbox build system was designed in a different era of the web. By forking and rewriting its core internals, we've gotten rid of massive amounts of technical debt (like `magicast` manipulations and complex configuration layers).
 
-### buildSW
-
-The `buildSW` mode will generate a list of URLs to precache, and add that precache manifest to an existing service worker file in your source codebase. `buildSW` is similar to `injectManifest`, but it will also build your service worker file using the Vite or Rolldown build process.
-
-#### When to use buildSW
-- You want more control over your service worker.
-- You want to precache files.
-- You need to customize routing and strategies.
-- You would like to use your service worker with other platform features (i.e. [Web Push](https://developer.mozilla.org/docs/Web/API/Push_API)).
-
-#### When NOT to use buildSW
-- You want the easiest path to adding a service worker to your site.
-
-## Additional modes
-
-We expect that `generateSW`, `injectManifest` or `buildSW` will suit most developers' needs. However, there is one other mode supported by `@vite-pwa/workbox-build` that might be appropriate for certain use cases.
-
-### `getManifest` mode
-
-This is conceptually similar to the `injectManifest` mode, but instead of adding the manifest into the source service worker file, it returns the array of manifest entries, along with information about the number of entries and total size.
-
-You can use the injectManifest mode within a node-based build script, using the most common [configuration options](/vite-pwa-workbox/api/symbols/workbox-build/getmanifestoptions), like so:
-
-```ts
-// Inside of build.js:
-import { getManifest } from '@vite-pwa/workbox-build'
-
-// These are some common options, and not all are required.
-// Consult the docs for more info.
-getManifest({
-  dontCacheBustURLsMatching: [new RegExp('...')],
-  globDirectory: '...',
-  globPatterns: ['...', '...'],
-  maximumFileSizeToCacheInBytes: ...,
-}).then(({manifestEntries, count, size, warnings}) => {
-  if (warnings.length > 0) {
-    console.warn(
-      'Warnings encountered while getting the manifest:',
-      warnings.join('\n')
-    )
-  }
-
-  // Do something with the manifestEntries, and potentially log count and size.
-})
-```
-
-## How is `@vite-pwa/workbox-build` related to `@unplugin-pwa/vite`?
-
-`@unplugin-pwa/vite` uses `generateSW`, `injectManifest` and `buildSW` methods internally when the `strategies` option is set to `generateSW`, `injectManifest` and `buildSW` respectively.
-
-When you configure `strategies: 'generateSW'` option (the default value) in your `vite.config.*` file, the plugin invokes workbox' `generateSW` method. The options passed to the `@vite-pwa/workbox-build` method will be those provided via the `generateSW` option of the plugin configuration (`workbox` options has been deprecated).
-
-When you configure `strategies: 'injectManifest'` option, the plugin will first build your custom service worker via custom `Vite` build. With the build result, `@unplugin-pwa/vite` will call Workbox's `injectManifest` method passing those options provided via the `injectManifest` option of the plugin configuration.
-
-When you configure `strategies: 'buildSW'` option, the plugin will first build your custom service worker via custom `Vite` build. With the build result, `@unplugin-pwa/vite` will call Workbox's `buildSW` method passing those options provided via the `buildSW` option of the plugin configuration.
+- **Native Bundler Performance**: The new `buildSW` engine hooks directly into Vite 8 or Rolldown 1's native dependency graphs.
+- **Service Worker Code-Splitting Support**: While the current `vite-plugin-pwa` forces the Service Worker to be built as a single monolith, the new version introduces full code-splitting support. The new engine checks if `inlineWorkboxRuntime` is disabled; if so, it automatically breaks down the monolith, computes the resulting dependency graphs, tracks internal synchronous imports, and guarantees that chunks are correctly structured and resolved whenever a Classic Service Worker build is targeted (either as a standalone choice or as part of the Dual Build strategy).
+- **Advanced Custom Chunks & Visual Graphing (Experimental)**: Alongside standard code-splitting, we are introducing highly experimental support for user-defined `customChunks` via granular configuration callbacks. The engine will dynamically map these custom allocations, resolve complex internal dependencies, and orchestrate them seamlessly. To guarantee total safety, the engine features a built-in contention layer that blocks deployment errors (such as preventing a Service Worker or its internal synchronous runtime dependencies from accidentally precaching themselves) and intercepts circular graph conflicts before they can pollute your production environments.
+- **Next-Gen ESM Service Worker Support**: Modern browser versions natively support Service Worker registration with `{ type: 'module' }`. To ensure compatibility with older browser versions, the new `buildSW` engine embraces this by offering native ESM Service Worker generation alongside an automated **Dual Build strategy** (or you can use the repository's `esm-sw-detector`). This allows you to compile a modern ESM Service Worker and a legacy Classic Service Worker fallback simultaneously from the same source. **Note that this strategy requires your source code to be written using strict ESM syntax (`import`/`export`)**; the engine will then automatically handle the down-leveling and inject the required internal orchestration whenever the Classic asset target is compiled.
+- **Automatic Feature Detection**: We are introducing `@vite-pwa/workbox-window`, which exposes a lightweight `esm-sw-detector` runtime utility based on verified [CanIUse](https://caniuse.com/?search=service+worker) baseline specifications. This module determines browser capabilities on the fly to orchestrate modern asset loading.
+- **Bundler Agnostic Future**: The separation of concerns makes the core engine completely agnostic. We will expose dedicated standalone plugins for **Webpack** and **Rspack** via `unplugin`. At the `buildEnd` phase of those bundlers, the plugin will seamlessly invoke **Rolldown internally** to bundle, resolve, and generate the final Service Worker.

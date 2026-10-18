@@ -6,9 +6,9 @@ title: injectManifest | Vite PWA Workbox
 
 You must read [Which Mode to Use](/vite-pwa-workbox/#which-mode-to-use) before decide using this strategy on `@unplugin-pwa/vite` plugin.
 
-Before writing your custom service worker, check if `@vite-pwa/workbox-build` can generate the code for you using `generateSW` strategy, looking for some plugin on `@vite-pwa/workbox-build` on [Runtime Caching Entry](/vite-pwa-workbox/api/symbols/workbox-build/runtimecaching).
+Before writing your custom service worker, check if `@vite-pwa/workbox-build` can generate the code for you using `generateSW` strategy, looking for some plugin on `@vite-pwa/workbox-build` on [Runtime Caching Entry](/api/symbols/workbox-build/runtimecaching).
 
-You can find the documentation for this method on `@vite-pwa/workbox-build`: [Vite buildSW](/vite-pwa-workbox/api/symbols/workbox-build/build/vite/build-sw/buildsw)
+You can find the documentation for this method on `@vite-pwa/workbox-build`: [Vite buildSW](/api/symbols/workbox-build/build/vite/build-sw/buildsw)
 
 ## Exclude routes
 
@@ -43,7 +43,7 @@ You can use the following code to create your custom service worker to be used w
 VitePWA({
   strategies: 'buildSW',
   buildSW: {
-	swSrc: 'srcsw.ts'	
+	swSrc: 'src/sw.ts'
   }
 })
 ```

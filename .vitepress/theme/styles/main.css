@@ -27,6 +27,11 @@ sup.VPBadgeCustom.tip {
   color: var(--vp-badge-tip-text);
   background-color: var(--vp-badge-tip-bg);
 }
+sup.VPBadgeCustom.warning {
+  border-color: var(--vp-badge-warning-border);
+  color: var(--vp-badge-warning-text);
+  background-color: var(--vp-badge-warning-bg);
+}
 .VPSocialLink {
   transform: scale(0.9);
 }
@@ -272,7 +277,6 @@ html.dark svg g[stroke-linecap="round"] > g[transform] > path[stroke="#1e1e1e"] 
   border-radius: 8px;
   background: var(--vp-c-bg-soft);
   transition: border-color 0.2s, box-shadow 0.2s;
-  cursor: pointer;            /* visual feedback */
 }
 
 .vp-doc table.symbol-table tbody tr:hover {
@@ -303,8 +307,9 @@ html.dark svg g[stroke-linecap="round"] > g[transform] > path[stroke="#1e1e1e"] 
 
 /* 6. The actual content – takes full width */
 .vp-doc table.symbol-table tbody td > * {
-  display: block;
-  width: 100%;
+  display: inline-block;
+  /*display: block;
+  width: 100%;*/
 }
 
 /* 7. Description wraps and fills the card */
@@ -318,7 +323,6 @@ html.dark svg g[stroke-linecap="round"] > g[transform] > path[stroke="#1e1e1e"] 
 .vp-doc table.symbol-table tbody td:first-child a {
   display: block;            /* makes the link take the full width of the cell */
   color: var(--vp-c-brand);
-  text-decoration: none;
   font-weight: 500;
 }
 
