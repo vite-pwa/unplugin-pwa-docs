@@ -170,10 +170,12 @@ function sig(name: string, s: any): string {
 
 function pkgLabel(s: ApiSymbol): string {
   if (s.pkg.startsWith('workbox-')) {
-    return s.module ? `@vite-pwa/${s.pkg}${s.module ? `/${s.module}` : ''}` : s.pkg
+    // return s.module ? `@vite-pwa/${s.pkg}${s.module ? `/${s.module}` : ''}` : s.pkg
+    return `@vite-pwa/${s.pkg}${s.module ? `/${s.module}` : ''}`
   }
   if (s.pkg.startsWith('unplugin-pwa-')) {
-    return s.module ? `@unplugin-pwa/${s.pkg.slice('unplugin-pwa-'.length)}${s.module ? `/${s.module}` : ''}` : s.pkg
+    // return s.module ? `@unplugin-pwa/${s.pkg.slice('unplugin-pwa-'.length)}${s.module ? `/${s.module}` : ''}` : s.pkg
+    return `@unplugin-pwa/${s.pkg.slice('unplugin-pwa-'.length)}${s.module ? `/${s.module}` : ''}`
   }
   return s.module ? `${s.pkg}/${s.module}` : s.pkg
 }
@@ -196,7 +198,7 @@ export function renderPackageHTML(pkg: PackageGroup, options?: PackageOptions): 
   const { title: pkgTitle, frontmatter, badge = 'package' } = options || {}
   const badgeText = badge === 'package' ? 'Package' : 'Subpackage'
   const title = pkgTitle || `${badgeText} ${prefix}${pkg.label}`
-  out.push(frontmatter || '--\nprev: true\nnext: true\n---\n\n')
+  out.push(frontmatter || `--\ntitle: '${title}'\n---\n\n`)
   out.push(`# ${title}`, '')
   // Use default slot instead of 'text' prop
   out.push(`<Badge type="info">${badgeText}</Badge>`, '')
@@ -262,7 +264,7 @@ export function renderPackageHTML(pkg: PackageGroup, options?: PackageOptions): 
 
 // ---- render symbol page ----
 export function renderSymbolPage(s: ApiSymbol): string {
-  return `---\ntitle: '${pkgLabel(s)}'\noutline: 'deep'\n---\n\n${renderSymbolHTML(s)}\n`
+  return `---\ntitle: '${s.name} | ${pkgLabel(s)} | API Reference'\noutline: 'deep'\n---\n\n${renderSymbolHTML(s)}\n`
 }
 
 export function renderSymbolHTML(s: ApiSymbol): string {

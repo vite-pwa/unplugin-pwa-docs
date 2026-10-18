@@ -229,8 +229,8 @@ catalogs:
       specifier: ^32.1.0
       version: 32.1.0
     vitepress:
-      specifier: https://pkg.pr.new/vitepress@16c020d
-      version: https://pkg.pr.new/vitepress@16c020d
+      specifier: https://pkg.pr.new/vitepress@b4079b6
+      version: https://pkg.pr.new/vitepress@b4079b6
     vitepress-plugin-group-icons:
       specifier: ^1.7.7
       version: 1.7.7
@@ -333,7 +333,7 @@ importers:
         version: 8.3.4(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1)
       vitepress:
         specifier: catalog:utils
-        version: https://pkg.pr.new/vitepress@16c020d(@types/node@24.19.1)(change-case@5.4.4)(jiti@2.7.0)(postcss@8.5.30)(typescript@6.0.3)(yaml@2.9.1)
+        version: https://pkg.pr.new/vitepress@b4079b6(@types/node@24.19.1)(change-case@5.4.4)(jiti@2.7.0)(postcss@8.5.30)(typescript@6.0.3)(yaml@2.9.1)
       vitepress-plugin-group-icons:
         specifier: catalog:utils
         version: 1.7.7(vite@8.3.4)
@@ -3443,8 +3443,8 @@ packages:
     resolution: {integrity: sha512-Qb42p9pYoRlMRbv+Yvh3reS4GInyr+ToU3G1tEC1Euz+gyBNywXkZIQPV/AoltizaakAeuI89Bkhkd7Y0jaM/w==}
     engines: {node: '>=18'}
 
-  vitepress@https://pkg.pr.new/vitepress@16c020d:
-    resolution: {integrity: sha512-T/fLXdfQX/Ss6LKrBCiG8DNxEi7nyi5Wxdg/hBPHE2x5n4y+awpL0mwUt6e/nq1mNL8+21yqC/LCudI3xC++fQ==, tarball: https://pkg.pr.new/vitepress@16c020d}
+  vitepress@https://pkg.pr.new/vitepress@b4079b6:
+    resolution: {integrity: sha512-bKMFf7h312WBFzbolIOBiBx0nr4Hz2eRXb/Y9tlJSevm37G9qleGE7QiveWg1hHN/gXKXXX9wD8daZNw19fvdA==, tarball: https://pkg.pr.new/vitepress@b4079b6}
     version: 2.0.0-alpha.20
     hasBin: true
     peerDependencies:
@@ -6848,7 +6848,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  vitepress@https://pkg.pr.new/vitepress@16c020d(@types/node@24.19.1)(change-case@5.4.4)(jiti@2.7.0)(postcss@8.5.30)(typescript@6.0.3)(yaml@2.9.1):
+  vitepress@https://pkg.pr.new/vitepress@b4079b6(@types/node@24.19.1)(change-case@5.4.4)(jiti@2.7.0)(postcss@8.5.30)(typescript@6.0.3)(yaml@2.9.1):
     dependencies:
       '@docsearch/css': 4.7.1
       '@docsearch/js': 4.7.1

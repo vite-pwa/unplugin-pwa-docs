@@ -188,7 +188,7 @@ const Frameworks: DefaultTheme.SidebarItem[] = [
     link: '/frameworks/tanstack',
   },
   {
-    text: 'Remix',
+    text: 'Remix <sup class="VPBadgeCustom warning">Deprecated</sup>',
     link: '/frameworks/remix',
   },
 ]
@@ -251,7 +251,7 @@ const Examples: DefaultTheme.SidebarItem[] = [
     link: '/examples/tanstack',
   },
   {
-    text: 'Remix',
+    text: 'Remix <sup class="VPBadgeCustom warning">Deprecated</sup>',
     link: '/examples/remix',
   },
 ]
@@ -260,6 +260,10 @@ const UnpluginPWA: DefaultTheme.SidebarItem[] = [
   {
     text: 'Getting Started',
     link: '/unplugin-pwa/',
+  },
+  {
+    text: 'Architecture Diagram',
+    link: '/unplugin-pwa/architecture',
   },
   {
     text: '@unplugin-pwa/core',
@@ -378,6 +382,7 @@ function prepareSidebar(idx: number) {
       collapsible: true,
       collapsed: true,
       link: '/api/',
+      activeMatch: '^/api/',
       items: apiSidebar(),
     },
   ].map<DefaultTheme.SidebarItem>((entry, i) => {

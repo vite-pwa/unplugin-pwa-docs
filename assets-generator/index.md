@@ -33,7 +33,7 @@ We also suggest you to include:
 - Avoid using `purpose: 'any maskable'` icon, as it is not supported by all browsers
 - An `favicon.ico` and `favicon.svg`, check [Preset Minimal 2023](#preset-minimal-2023) for more details
 
-### Preset Minimal 2023 <Badge type="tip" text="New from v0.1.0" />
+### Preset Minimal 2023
 
 Refer to [Definitive edition of "How to Favicon" in 2023](https://dev.to/masakudamatsu/favicon-nightmare-how-to-maintain-sanity-3al7) for more details.
 
@@ -46,7 +46,7 @@ Our minimal recommendation is:
 - white 512x512 icon with `purpose: 'maskable'` (PWA Manifest icon): background color can be customized to your needs
 - white 180x180 icon for iOS/MacOS (html head link: `<link rel="apple-touch-icon" href="/apple-touch-icon.png">`): background color can be customized to your needs
 
-### Preset Minimal <Badge type="danger" text="Deprecated from v0.1.0" />
+### Preset Minimal <Badge type="danger" text="Deprecated" />
 
 Our minimal recommendation is:
 - transparent 64x64 ico: register it in the html head: `<link rel="icon" href="/favicon.ico" sizes="any">`

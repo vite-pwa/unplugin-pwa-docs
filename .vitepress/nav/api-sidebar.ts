@@ -52,6 +52,7 @@ export function apiSidebar() {
           text: sp.module,
           link: `/api/packages/${sp.slug}`,
           collapsed: true,
+          collapsible: true,
           // items: sp.symbols
           //   .sort((a, b) => a.kindLabel.localeCompare(b.kindLabel) || a.name.localeCompare(b.name))
           //   .map(link),

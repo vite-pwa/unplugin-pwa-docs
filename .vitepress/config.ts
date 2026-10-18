@@ -42,6 +42,7 @@ export default withPwa(defineConfig({
       light: 'vitesse-light',
       dark: 'vitesse-dark',
     },
+    mermaid: true,
     config(md) {
       md.use(groupIconMdPlugin)
       md.use(copyOrDownloadAsMarkdownButtons)

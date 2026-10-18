@@ -3,8 +3,14 @@ import { dirname, resolve } from 'node:path'
 import { getPackages, getSymbols } from './generate.ts'
 import { renderPackageHTML, renderSymbolPage } from './render.ts'
 
+// remove VP cache
 rmSync(resolve('.vitepress/cache'), { recursive: true, force: true })
+// Wipe and recreate so stale files from old flat layout don't linger.
+rmSync(resolve('api/packages'), { recursive: true, force: true })
+rmSync(resolve('api/symbols'), { recursive: true, force: true })
+// Recreate the directories so we can write files into them.
 mkdirSync(resolve('api/packages'), { recursive: true })
+mkdirSync(resolve('api/symbols'), { recursive: true })
 
 const packages = getPackages()
 const titleSuffix = ' | API Reference'
@@ -46,10 +52,6 @@ title: '${title}${titleSuffix}'
   writeFileSync(outPath, html, 'utf-8')
   console.log(`✅ Generated package page: ${outPath}`)
 }
-
-// Wipe and recreate so stale files from old flat layout don't linger.
-rmSync(resolve('api/symbols'), { recursive: true, force: true })
-mkdirSync(resolve('api/symbols'), { recursive: true })
 
 const symbols = getSymbols()
 for (const s of symbols) {
