@@ -4,7 +4,11 @@ next: Getting Started | Examples
 outline: deep
 ---
 
-# Remix
+# Remix <Badge text="Deprecated" type="warning"/>
+
+::: warning Deprecation Notice
+The `@vite-pwa/remix` package has been discontinued and is now deprecated following Remix's migration to React Router. We highly recommend migrating to the new React Router integration.
+:::
 
 <ChangeLog />
 
@@ -14,7 +18,7 @@ This PWA module can only be used with Vite.
 
 ## Remix PWA module
 
-`vite-plugin-pwa` provides the new `@vite-pwa/remix` module that will allow you to use `vite-plugin-pwa` in your Remix applications via `Vite` plugin and `Remix` preset.
+Historically, the `@vite-pwa/remix` package allowed you to use `vite-plugin-pwa` in your Remix applications via a custom `Vite` plugin and `Remix` preset.
 
 You will need to install `@vite-pwa/remix`:
 ::: code-group

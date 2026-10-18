@@ -67,7 +67,8 @@ catalogs:
     taze: 21.1.0
     unocss: ^66.11.0
     unplugin-vue-components: ^32.1.0
-    vitepress: https://pkg.pr.new/vitepress@16c020d
+    vitepress: https://pkg.pr.new/vitepress@b4079b6
+#    vitepress: https://pkg.pr.new/vitepress@16c020d
     vitepress-plugin-group-icons: ^1.7.7
     vitepress-plugin-llms: ^1.14.0
   vite:

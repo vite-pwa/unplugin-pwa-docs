@@ -31,8 +31,9 @@ export async function transformHead({ pageData }: TransformContext): Promise<Hea
   }
 
   // prompt for update image
-  if (pageData.relativePath === 'guide/prompt-for-update.md')
+  if (pageData.relativePath === 'guide/prompt-for-update.md') {
     head.push(['link', { rel: 'prefetch', href: '/prompt-update.png' }])
+  }
 
   return head
 }
