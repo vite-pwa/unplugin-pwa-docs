@@ -1,7 +1,7 @@
 ---
 title: Getting Started | Vite PWA Workbox
 prev:
-  text: Inspector Package | Unplugin PWA
+  text: '@unplugin-pwa/inspector | Unplugin PWA'
   link: /unplugin-pwa/inspector/
 ---
 
