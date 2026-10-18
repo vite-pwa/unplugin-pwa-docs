@@ -7,11 +7,21 @@ function htmlEscape(text: string): string {
     return ''
   }
 
-  // 0. Extract and protect multi-line code blocks (```...```)
   const codeBlocks: string[] = []
+  const placeholders: string[] = []
+  let placeholderIndex = 0
+
+  // 0. Extract and protect multi-line code blocks (```...```)
   let processedText = text.replace(/```(\w*)\r?\n([\s\S]*?)```/g, (match, lang, code) => {
     codeBlocks.push(code.trim())
-    return `__CODE_BLOCK_${codeBlocks.length - 1}__`
+
+    let placeholder: string
+    do {
+      placeholder = `__CODE_BLOCK_${placeholderIndex++}__`
+    } while (text.includes(placeholder))
+
+    placeholders.push(placeholder)
+    return placeholder
   })
 
   processedText = processedText
@@ -19,7 +29,6 @@ function htmlEscape(text: string): string {
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
-
     // 2. Manual parsing of inline Markdown to HTML tags
     .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
     .replace(/`([^`]+)`/g, '<code>$1</code>') // Now this will only affect single backticks
@@ -28,23 +37,21 @@ function htmlEscape(text: string): string {
       const safeUrl = url.replace(/"/g, '&quot;')
       return `<a href="${safeUrl}" target="_blank" rel="noopener noreferrer">${text}</a>`
     })
-
     // 3. Smart line breaks
     .replace(/(.)\r?\n(?!\n|- |\* |\d+\. )/g, '$1 ')
     .replace(/\r?\n/g, '<br>')
     .trim()
 
-  // 4. Restore multi-line code blocks in HTML format
-  processedText = processedText.replace(/__CODE_BLOCK_(\d+)__/g, (match, index) => {
-    const code = codeBlocks[Number(index)]
-    // Escape the HTML inside the code, but keep the \n intact
+  // 4. Restore the code blocks using the saved placeholders
+  placeholders.forEach((placeholder, index) => {
+    const code = codeBlocks[index]
     const escapedCode = code
       .replace(/&/g, '&amp;')
       .replace(/</g, '&lt;')
       .replace(/>/g, '&gt;')
 
-    // Wrap it in <pre><code> so that the HTML table respects the format
-    return `<pre><code>${escapedCode}</code></pre>`
+    // We use split.join instead of regex to avoid parsing issues
+    processedText = processedText.split(placeholder).join(`<pre><code>${escapedCode}</code></pre>`)
   })
 
   return processedText
