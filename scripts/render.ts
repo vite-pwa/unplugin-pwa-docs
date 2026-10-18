@@ -23,7 +23,11 @@ function htmlEscape(text: string): string {
     // 2. Manual parsing of inline Markdown to HTML tags
     .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
     .replace(/`([^`]+)`/g, '<code>$1</code>') // Now this will only affect single backticks
-    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
+    // Links: [text](url) -> <a>text</a> (escaping quotes in the URL)
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, (match, text, url) => {
+      const safeUrl = url.replace(/"/g, '&quot;')
+      return `<a href="${safeUrl}" target="_blank" rel="noopener noreferrer">${text}</a>`
+    })
 
     // 3. Smart line breaks
     .replace(/(.)\r?\n(?!\n|- |\* |\d+\. )/g, '$1 ')
