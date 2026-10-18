@@ -7,22 +7,100 @@ function htmlEscape(text: string): string {
     return ''
   }
 
-  return text
+  const codeBlocks: string[] = []
+  const placeholders: string[] = []
+  let placeholderIndex = 0
+
+  // 0. Extract and protect multi-line code blocks (```...```)
+  let processedText = text.replace(/```(\w*)\r?\n([\s\S]*?)```/g, (match, lang, code) => {
+    codeBlocks.push(code.trim())
+
+    let placeholder: string
+    do {
+      placeholder = `__CODE_BLOCK_${placeholderIndex++}__`
+    } while (text.includes(placeholder))
+
+    placeholders.push(placeholder)
+    return placeholder
+  })
+
+  processedText = processedText
+    // 1. Essential HTML escapes
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#39;')
-    .replace(/\r?\n/g, ' ')
+    // 2. Manual parsing of inline Markdown to HTML tags
+    .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+    .replace(/`([^`]+)`/g, '<code>$1</code>') // Now this will only affect single backticks
+    // Links: [text](url) -> <a>text</a> (escaping quotes in the URL)
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, (match, text, url) => {
+      const safeUrl = url.replace(/"/g, '&quot;')
+      return `<a href="${safeUrl}" target="_blank" rel="noopener noreferrer">${text}</a>`
+    })
+    // 3. Smart line breaks
+    .replace(/(.)\r?\n(?!\n|- |\* |\d+\. )/g, '$1 ')
+    .replace(/\r?\n/g, '<br>')
     .trim()
+
+  // 4. Restore the code blocks using the saved placeholders
+  placeholders.forEach((placeholder, index) => {
+    const code = codeBlocks[index]
+    const escapedCode = code
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+
+    // We use split.join instead of regex to avoid parsing issues
+    processedText = processedText.split(placeholder).join(`<pre><code>${escapedCode}</code></pre>`)
+  })
+
+  return processedText
 }
 
 // ---- comment helpers ----
-function renderComment(comment: any): string {
-  if (!comment?.summary) {
-    return ''
+function renderComment(comment: any, excludeReturns = false): string {
+  const entries: string[] = []
+  if (comment?.summary) {
+    entries.push(comment.summary.map((p: any) => p.text ?? '').join('').trim())
   }
-  return comment.summary.map((p: any) => p.text ?? '').join('').trim()
+  if (comment?.blockTags && Array.isArray(comment.blockTags)) {
+    for (const tag of comment.blockTags) {
+      if (tag?.tag === '@example') {
+        if (tag.content && Array.isArray(tag.content) && tag.content.length > 0) {
+          const exampleContent = tag.content.map((c: any) => c.text ?? '').join('')
+          entries.push(`**Example:**\n\n${exampleContent.trim()}`)
+        }
+      }
+      else if (!excludeReturns && (tag?.tag === '@returns' || tag?.tag === '@return')) {
+        // Note: in modern TypeDoc, tag.content is usually an array just like in @example.
+        // If @returns ever fails, change it to a .map() like the one above.
+        if (tag.content?.type === 'text') {
+          entries.push(`**Returns:** ${tag.content.map((p: any) => p.text ?? '').join('').trim()}`)
+        }
+        else if (Array.isArray(tag.content)) {
+          // Preventive fix in case TypeDoc also sends the returns as an array
+          entries.push(`**Returns:** ${tag.content.map((p: any) => p.text ?? '').join('').trim()}`)
+        }
+      }
+    }
+  }
+  return entries.join('\n\n').trim()
+}
+
+function extractReturns(comment: any): string {
+  if (comment?.blockTags && Array.isArray(comment.blockTags)) {
+    for (const tag of comment.blockTags) {
+      if (tag?.tag === '@returns' || tag?.tag === '@return') {
+        if (tag.content?.type === 'text') {
+          return `**Returns:** ${tag.content.map((p: any) => p.text ?? '').join('').trim()}`
+        }
+        else if (Array.isArray(tag.content)) {
+          return `**Returns:** ${tag.content.map((p: any) => p.text ?? '').join('').trim()}`
+        }
+      }
+    }
+  }
+  return ''
 }
 
 function renderCommentShort(comment: any): string {
@@ -91,6 +169,12 @@ function sig(name: string, s: any): string {
 }
 
 function pkgLabel(s: ApiSymbol): string {
+  if (s.pkg.startsWith('workbox-')) {
+    return s.module ? `@vite-pwa/${s.pkg}${s.module ? `/${s.module}` : ''}` : s.pkg
+  }
+  if (s.pkg.startsWith('unplugin-pwa-')) {
+    return s.module ? `@unplugin-pwa/${s.pkg.slice('unplugin-pwa-'.length)}${s.module ? `/${s.module}` : ''}` : s.pkg
+  }
   return s.module ? `${s.pkg}/${s.module}` : s.pkg
 }
 
@@ -104,10 +188,11 @@ export interface PackageOptions {
 export function renderPackageHTML(pkg: PackageGroup, options?: PackageOptions): string {
   const out: string[] = []
   const [urlPrefix, prefix] = pkg.label.startsWith('workbox-')
-    ? ['/vite-pwa-workbox', '@vite-pwa/'] as const
+    ? ['', '@vite-pwa/'] as const
     : pkg.label.startsWith('unplugin-pwa-')
-      ? ['/unplugin-pwa', '@unplugin-pwa/'] as const
-      : ['', '', undefined] as const
+      ? ['', '@unplugin-pwa/'] as const
+      : ['', ''] as const
+  console.log(prefix, pkg.label)
   const { title: pkgTitle, frontmatter, badge = 'package' } = options || {}
   const badgeText = badge === 'package' ? 'Package' : 'Subpackage'
   const title = pkgTitle || `${badgeText} ${prefix}${pkg.label}`
@@ -177,7 +262,7 @@ export function renderPackageHTML(pkg: PackageGroup, options?: PackageOptions): 
 
 // ---- render symbol page ----
 export function renderSymbolPage(s: ApiSymbol): string {
-  return `---\nprev: true\nnext: true\n---\n\n${renderSymbolHTML(s)}\n`
+  return `---\ntitle: '${pkgLabel(s)}'\noutline: 'deep'\n---\n\n${renderSymbolHTML(s)}\n`
 }
 
 export function renderSymbolHTML(s: ApiSymbol): string {
@@ -209,7 +294,7 @@ export function renderSymbolHTML(s: ApiSymbol): string {
     case 8: { // Enum
       const members = (r.children ?? []).filter((c: any) => c.kind === 16)
       if (members.length) {
-        out.push('<h2>Members</h2>', '')
+        out.push('## Members', '')
         const rows = members.map((m: any) =>
           `<tr><td data-label="Member"><code>${htmlEscape(m.name)}</code></td><td data-label="Value"><code>${htmlEscape(m.type?.value ?? '')}</code></td></tr>`,
         ).join('\n')
@@ -225,31 +310,100 @@ export function renderSymbolHTML(s: ApiSymbol): string {
       else {
         for (const s2 of sigs) {
           out.push(`\`\`\`ts\n${sig(s.name, s2)}\n\`\`\``, '')
-          const sd = renderComment(s2.comment)
+          // excludeReturns is true here because we render the returns separately below the parameters.
+          // If we don't exclude it, the returns will be before the parameters.
+          const sd = renderComment(s2.comment, true)
           if (sd) {
             out.push(sd, '')
           }
           const ps = (s2.parameters ?? []).filter((p: any) => p.comment)
           if (ps.length) {
-            const items = ps.map((p: any) => `<li><code>${htmlEscape(p.name)}</code> – ${htmlEscape(renderComment(p.comment))}</li>`).join('\n')
-            out.push('**Parameters**', '')
-            out.push(`<ul>\n${items}\n</ul>`, '')
+            const items = ps.map((p: any) => {
+              // Indent the comment so it sits properly under the Markdown list bullet
+              const commentLines = renderComment(p.comment).split('\n')
+              const indentedComment = commentLines.map((line, idx) => idx === 0 ? line : `  ${line}`).join('\n')
+              return `- \`${p.name}\` – ${indentedComment}`
+            }).join('\n\n')
+
+            out.push('### Parameters', '')
+            out.push(items, '')
+          }
+          const returnsDoc = extractReturns(s2.comment)
+          if (returnsDoc) {
+            out.push(returnsDoc, '')
           }
         }
       }
       break
     }
     case 128: { // Class
+      // 1. Extract and render the Constructor (kind === 512)
+      const constructors = (r.children ?? []).filter((c: any) => c.kind === 512)
+      if (constructors.length) {
+        out.push('## Constructor', '')
+        for (const ctor of constructors) {
+          const sigs = ctor.signatures ?? []
+          for (const s2 of sigs) {
+            // Generate the signature in the format "new ClassName(params)"
+            const paramsStr = (s2.parameters ?? [])
+              .map((p: any) => `${p.name}${p.flags?.isOptional ? '?' : ''}: ${renderType(p.type)}`)
+              .join(', ')
+            out.push(`\`\`\`ts\nnew ${s.name}(${paramsStr})\n\`\`\``, '')
+
+            const cd = renderComment(s2.comment)
+            if (cd) {
+              out.push(cd, '')
+            }
+
+            // Render the constructor parameters
+            const ps = (s2.parameters ?? []).filter((p: any) => p.comment)
+            if (ps.length) {
+              const items = ps.map((p: any) => {
+                const commentLines = renderComment(p.comment).split('\n')
+                const indentedComment = commentLines.map((line, idx) => idx === 0 ? line : `  ${line}`).join('\n')
+                return `- \`${p.name}\` – ${indentedComment}`
+              }).join('\n\n')
+
+              out.push('**Parameters**', '')
+              out.push(items, '')
+            }
+          }
+        }
+      }
+
+      // 2. Properties
       out.push(renderProperties(r.children ?? []), '')
+
+      // 3. Methods
       const methods = (r.children ?? []).filter((c: any) => c.kind === 2048)
       if (methods.length) {
-        out.push('<h2>Methods</h2>', '')
+        out.push('## Methods', '')
         for (const m of methods) {
-          out.push(`<h3>${htmlEscape(m.name)}()</h3>`, '')
+          out.push(`### ${m.name}()`, '')
           out.push(`\`\`\`ts\n${sig(m.name, m.signatures?.[0])}\n\`\`\``, '')
-          const md = renderComment(m.signatures?.[0]?.comment ?? m.comment)
+          // We use excludeReturns as true just like in functions to separate the Return
+          const md = renderComment(m.signatures?.[0]?.comment ?? m.comment, true)
           if (md) {
             out.push(md, '')
+          }
+
+          // Render the method parameters
+          const ps = (m.signatures?.[0]?.parameters ?? []).filter((p: any) => p.comment)
+          if (ps.length) {
+            const items = ps.map((p: any) => {
+              const commentLines = renderComment(p.comment).split('\n')
+              const indentedComment = commentLines.map((line, idx) => idx === 0 ? line : `  ${line}`).join('\n')
+              return `- \`${p.name}\` – ${indentedComment}`
+            }).join('\n\n')
+
+            out.push('**Parameters**', '')
+            out.push(items, '')
+          }
+
+          // Add the extraction of the Return for the methods
+          const returnsDoc = extractReturns(m.signatures?.[0]?.comment)
+          if (returnsDoc) {
+            out.push(returnsDoc, '')
           }
         }
       }
@@ -267,7 +421,7 @@ function renderProperties(children: any[]): string {
   }
 
   const out: string[] = []
-  out.push('<h2>Properties</h2>')
+  out.push('## Properties', '')
   out.push('<table class="symbol-table"><thead><tr><th>Property</th><th>Type</th><th>Default</th><th>Description</th></tr></thead><tbody>')
   for (const p of props) {
     const opt = p.flags?.isOptional ? '?' : ''

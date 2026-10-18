@@ -45,15 +45,15 @@ catalogs:
     eslint-plugin-antfu: ^3.2.3
 
   pwa:
-    '@unplugin-pwa/core': https://pkg.pr.new/@unplugin-pwa/core@d404f04
-    '@unplugin-pwa/inspector': https://pkg.pr.new/@unplugin-pwa/inspector@d404f04
-    '@unplugin-pwa/types': https://pkg.pr.new/@unplugin-pwa/types@d404f04
-    '@unplugin-pwa/vite': https://pkg.pr.new/@unplugin-pwa/vite@d404f04
+    '@unplugin-pwa/core': https://pkg.pr.new/@unplugin-pwa/core@eb402e0
+    '@unplugin-pwa/inspector': https://pkg.pr.new/@unplugin-pwa/inspector@eb402e0
+    '@unplugin-pwa/types': https://pkg.pr.new/@unplugin-pwa/types@eb402e0
+    '@unplugin-pwa/vite': https://pkg.pr.new/@unplugin-pwa/vite@eb402e0
     '@vite-pwa/assets-generator': ^2.0.0
-    '@vite-pwa/workbox-build': ^8.0.12
-    '@vite-pwa/workbox-swkit': ^8.0.12
-    '@vite-pwa/workbox-types': ^8.0.12
-    '@vite-pwa/workbox-window': ^8.0.12
+    '@vite-pwa/workbox-build': ^8.0.13
+    '@vite-pwa/workbox-swkit': ^8.0.13
+    '@vite-pwa/workbox-types': ^8.0.13
+    '@vite-pwa/workbox-window': ^8.0.13
   types:
     '@types/node': 24.19.1
   typescript:
@@ -81,13 +81,13 @@ minimumReleaseAgeExclude:
   - '@vite-pwa/workbox-build'
   - '@vite-pwa/workbox-swkit'
   - '@vite-pwa/workbox-window'
-  - '@vite-pwa/workbox-types@8.0.12'
+  - '@vite-pwa/workbox-types'
 
 supportedArchitectures:
+  cpu:
+    - x64
+    - arm64
   os:
     - win32
     - darwin
     - current
-  cpu:
-    - x64
-    - arm64

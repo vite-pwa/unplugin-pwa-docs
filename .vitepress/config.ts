@@ -1,7 +1,6 @@
 import { defineConfig } from 'vitepress'
 import { groupIconMdPlugin, groupIconVitePlugin } from 'vitepress-plugin-group-icons'
 import llmsVitePlugin, { copyOrDownloadAsMarkdownButtons } from 'vitepress-plugin-llms'
-import { pwa } from './conf/pwa.ts'
 import { transformHead } from './conf/transform-head.ts'
 import { description, ogImage, ogUrl } from './constants.ts'
 import { nav, sidebar } from './nav/index.ts'
@@ -54,10 +53,10 @@ export default withPwa(defineConfig({
   },
   themeConfig: {
     // logo: '/favicon.svg',
-    /* editLink: {
-      pattern: 'https://github.com/vite-pwa/docs/edit/main/:path',
+    editLink: {
+      pattern: 'https://github.com/vite-pwa/unplugin-pwa-docs/edit/main/:path',
       text: 'Suggest changes to this page',
-    }, */
+    },
     search: {
       provider: 'local',
       /*
@@ -71,7 +70,7 @@ export default withPwa(defineConfig({
     },
     socialLinks: [
       { icon: 'discord', link: 'https://discord.gg/uccDuWkScq' },
-      { icon: 'github', link: 'https://github.com/vite-pwa/unplugin-pwa' },
+      { icon: 'github', link: 'https://github.com/vite-pwa/unplugin-pwa-docs' },
     ],
     footer: {
       message: 'Released under the MIT License.',
@@ -89,6 +88,8 @@ export default withPwa(defineConfig({
       }),
     ],
   },
-  pwa,
+  pwa: {
+    path: '.vitepress/conf/pwa.ts',
+  },
   transformHead,
 }))

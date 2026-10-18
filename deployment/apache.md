@@ -1,8 +1,8 @@
 ---
 title: Apache Http Server 2.4+ | Deployment
 next: 
-  text: Getting Started | Unplugin PWA
-  link: /unplugin-pwa/
+  text: API Reference
+  link: /api/
 ---
 
 # Apache Http Server 2.4+

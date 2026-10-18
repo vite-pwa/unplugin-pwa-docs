@@ -1,7 +1,9 @@
 ---
 title: Getting Started | PWA Assets Generator
-prev: FAQ | Guide
 outline: deep
+prev:
+  text: Getting Started | Vite PWA Workbox
+  link: /vite-pwa-workbox/
 ---
 
 # Getting Started

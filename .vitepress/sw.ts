@@ -1,6 +1,5 @@
 /// <reference types="vite/client" />
 /// <reference lib="webworker" />
-
 import { CacheableResponsePlugin } from '@vite-pwa/workbox-swkit/cacheable-response'
 import { ExpirationPlugin } from '@vite-pwa/workbox-swkit/expiration'
 import { cleanupOutdatedCaches, createHandlerBoundToURL, precacheAndRoute } from '@vite-pwa/workbox-swkit/precaching'
@@ -9,9 +8,6 @@ import { NetworkFirst, NetworkOnly, StaleWhileRevalidate } from '@vite-pwa/workb
 import { API_CACHE_NAME, API_PAGE_REGEX, prepareApiPages } from './pages.ts'
 
 declare let self: ServiceWorkerGlobalScope
-
-// eslint-disable-next-line no-console
-console.log('X')
 
 if (import.meta.env.ENABLE_SWKIT_LOGS) {
   self.__WB_DISABLE_DEV_LOGS = false

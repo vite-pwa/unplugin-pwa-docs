@@ -1,4 +1,4 @@
-import { getSymbols, slugify } from '../../generate.ts'
+import { getSymbols, slugify } from '../scripts/generate.ts'
 
 const loader = {
   load() {

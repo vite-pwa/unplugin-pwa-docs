@@ -85,7 +85,7 @@ export default defineConfig({
 If you build your application, the [Web App Manifest][webmanifest] will be generated and configured on the application entry point, the service worker will be also generated and the script/module to register it in the browser added.
 
 ::: info
-`@unplugin-pwa/vite` plugin uses [@vite-pwa/workbox-build](/vite-pwa-workbox/api/packages/workbox-build-index) node package to build the service worker, you can find more information in the [Service Worker Strategies And Behaviors](/guide/service-worker-strategies-and-behaviors) and [VITE PWA Workbox](/vite-pwa-workbox/) sections.
+`@unplugin-pwa/vite` plugin uses [@vite-pwa/workbox-build](/api/packages/workbox-build-index) node package to build the service worker, you can find more information in the [Service Worker Strategies And Behaviors](/guide/service-worker-strategies-and-behaviors) and [VITE PWA Workbox](/vite-pwa-workbox/) sections.
 :::
 
 [webmanifest]: https://developer.mozilla.org/en-US/docs/Web/Manifest

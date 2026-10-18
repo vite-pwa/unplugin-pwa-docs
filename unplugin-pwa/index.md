@@ -2,8 +2,8 @@
 title: Getting Started | Unplugin PWA
 next: true
 prev:
-  text: Apache Http Server 2.4+ | Deployment
-  link: /deployment/apache
+  text: FAQ | Guide
+  link: /guide/faq
 ---
 
 # Getting Started
