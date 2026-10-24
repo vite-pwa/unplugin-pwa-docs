@@ -1,8 +1,8 @@
 ---
 title: Documentation Status
 prev:
-   url: /api/packages/workbox-window-esm-sw-detector
    text: esm-sw-detector | API Reference
+   link: /api/packages/workbox-window-esm-sw-detector
 ---
 
 # 🚧 Documentation Status
