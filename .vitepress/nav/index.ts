@@ -385,6 +385,10 @@ function prepareSidebar(idx: number) {
       activeMatch: '^/api/',
       items: apiSidebar(),
     },
+    {
+      text: '🚧 Documentation Status',
+      link: '/docs-status',
+    },
   ].map<DefaultTheme.SidebarItem>((entry, i) => {
     if (idx === i) {
       entry.collapsed = false
@@ -403,6 +407,7 @@ export const sidebar: DefaultTheme.Sidebar = {
   '/examples/': prepareSidebar(5),
   '/deployment/': prepareSidebar(6),
   '/api/': prepareSidebar(7),
+  '/docs-status': prepareSidebar(8),
 }
 
 export const nav: DefaultTheme.NavItem[] = [

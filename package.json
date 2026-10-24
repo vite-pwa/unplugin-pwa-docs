@@ -54,6 +54,7 @@
   "devDependencies": {
     "@antfu/eslint-config": "catalog:eslint",
     "@antfu/ni": "catalog:utils",
+    "@iconify-json/carbon": "catalog:utils",
     "@types/node": "catalog:types",
     "@unplugin-pwa/core": "catalog:pwa",
     "@unplugin-pwa/inspector": "catalog:pwa",

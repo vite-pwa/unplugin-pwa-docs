@@ -8,6 +8,7 @@ import HomePage from './components/HomePage.vue'
 import NotFound from './components/NotFound.vue'
 import OfflineToast from './components/OfflineToast.vue'
 import ReloadPrompt from './components/ReloadPrompt.vue'
+import WipBanner from './components/WipBanner.vue'
 
 const online = useOnline()
 const route = useRoute()
@@ -109,6 +110,12 @@ onMounted(async () => {
         :api-page-offline="apiPageOffline"
         @retry="retry"
       />
+    </template>
+    <template #home-hero-before>
+      <WipBanner home />
+    </template>
+    <template #doc-before>
+      <WipBanner />
     </template>
     <template #nav-bar-content-before>
       <ClientOnly>
