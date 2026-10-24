@@ -26,6 +26,10 @@
   X-Frame-Options: DENY
   X-XSS-Protection: 1; mode=block
 
+/api/
+  X-Frame-Options: DENY
+  X-XSS-Protection: 1; mode=block
+
 /*.html
   X-Frame-Options: DENY
   X-XSS-Protection: 1; mode=block

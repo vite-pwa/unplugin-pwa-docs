@@ -35,5 +35,6 @@ declare module 'vue' {
     SsrSsg: typeof import('./theme/components/SsrSsg.md')['default']
     TeamMembersItem: typeof import('./theme/components/vp/TeamMembersItem.vue')['default']
     TypeScriptError2307: typeof import('./theme/components/TypeScriptError2307.md')['default']
+    WipBanner: typeof import('./theme/components/WipBanner.vue')['default']
   }
 }

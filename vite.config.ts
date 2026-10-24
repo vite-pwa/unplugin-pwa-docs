@@ -1,5 +1,5 @@
 import { fileURLToPath } from 'node:url'
-import { presetAttributify, presetWind3 } from 'unocss'
+import { presetAttributify, presetIcons, presetWind3 } from 'unocss'
 import Unocss from 'unocss/vite'
 import Components from 'unplugin-vue-components/vite'
 import { defineConfig } from 'vite'
@@ -54,7 +54,7 @@ export default defineConfig({
 
     // https://github.com/unocss/unocss
     Unocss({
-      presets: [presetWind3(), presetAttributify()],
+      presets: [presetWind3(), presetAttributify(), presetIcons()],
     }),
     /* {
       name: 'fix-workbox-window-import',
