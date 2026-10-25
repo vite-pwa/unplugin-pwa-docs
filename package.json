@@ -61,6 +61,7 @@
     "@unplugin-pwa/types": "catalog:pwa",
     "@unplugin-pwa/vite": "catalog:pwa",
     "@vite-pwa/assets-generator": "catalog:pwa",
+    "@vite-pwa/vitepress": "catalog:pwa",
     "@vite-pwa/workbox-build": "catalog:pwa",
     "@vite-pwa/workbox-swkit": "catalog:pwa",
     "@vite-pwa/workbox-types": "catalog:pwa",

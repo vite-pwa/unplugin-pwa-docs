@@ -1,10 +1,10 @@
+import { withPwa } from '@vite-pwa/vitepress'
 import { defineConfig } from 'vitepress'
 import { groupIconMdPlugin, groupIconVitePlugin } from 'vitepress-plugin-group-icons'
 import llmsVitePlugin, { copyOrDownloadAsMarkdownButtons } from 'vitepress-plugin-llms'
 import { transformHead } from './conf/transform-head.ts'
 import { description, ogImage, ogUrl } from './constants.ts'
 import { nav, sidebar } from './nav/index.ts'
-import { withPwa } from './with-pwa/index.ts'
 
 export default withPwa(defineConfig({
   lang: 'en-US',

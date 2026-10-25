@@ -1,5 +1,5 @@
+import { definePwaConfig } from '@vite-pwa/vitepress/config'
 import { ogImagePWA } from '../constants.ts'
-import { definePwaConfig } from '../with-pwa/config.ts'
 
 export default definePwaConfig({
   outDir: '.vitepress/dist',
