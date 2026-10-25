@@ -50,6 +50,7 @@ catalogs:
     '@unplugin-pwa/types': ^0.0.2
     '@unplugin-pwa/vite': ^0.0.2
     '@vite-pwa/assets-generator': ^2.0.0
+    '@vite-pwa/vitepress': ^2.0.1
     '@vite-pwa/workbox-build': ^8.0.13
     '@vite-pwa/workbox-swkit': ^8.0.13
     '@vite-pwa/workbox-types': ^8.0.13
@@ -84,6 +85,7 @@ minimumReleaseAgeExclude:
   - '@unplugin-pwa/inspector'
   - '@unplugin-pwa/types'
   - '@unplugin-pwa/vite'
+  - '@vite-pwa/vitepress'
   - '@vite-pwa/workbox-build'
   - '@vite-pwa/workbox-swkit'
   - '@vite-pwa/workbox-window'

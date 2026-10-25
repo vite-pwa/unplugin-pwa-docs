@@ -190,6 +190,9 @@ catalogs:
     '@vite-pwa/assets-generator':
       specifier: ^2.0.0
       version: 2.0.0
+    '@vite-pwa/vitepress':
+      specifier: ^2.0.1
+      version: 2.0.1
     '@vite-pwa/workbox-build':
       specifier: ^8.0.13
       version: 8.0.13
@@ -295,6 +298,9 @@ importers:
       '@vite-pwa/assets-generator':
         specifier: catalog:pwa
         version: 2.0.0(@types/node@24.19.1)
+      '@vite-pwa/vitepress':
+        specifier: catalog:pwa
+        version: 2.0.1(@vite-pwa/assets-generator@2.0.0)(rolldown@1.2.14)(typescript@6.0.3)(vite@8.3.4)(vitepress@https://pkg.pr.new/vitepress@b4079b6)
       '@vite-pwa/workbox-build':
         specifier: catalog:pwa
         version: 8.0.13(rolldown@1.2.14)(typescript@6.0.3)(vite@8.3.4)
@@ -1311,6 +1317,23 @@ packages:
     resolution: {integrity: sha512-GBjHBLBzOP1GDJTc7MjeDdeJTi+PS9eFjw3HYjNHXnEbkS7vRS/YFwl8VW5/4vWF0Fo35Mji1yXAABvSVzu0Ew==}
     engines: {node: '>=20.19.0'}
     hasBin: true
+
+  '@vite-pwa/vitepress@2.0.1':
+    resolution: {integrity: sha512-S/tpIFx3WR7FUTZs9CkjWsoRnp/tvc/rWxYEFt12j+Kg/a4iWyWSpKTGUi2EGOXVc+nO0qJFPYkR7KHrnpTbjQ==}
+    version: 2.0.1
+    engines: {node: '>=22.14.0'}
+    peerDependencies:
+      '@vite-pwa/assets-generator': ^1.0.0 || ^2.0.0
+      magicast: ^0.5.0
+      rolldown: ^1.0.0-0
+      vitepress: ^1.0.0 || ^2.0.0-0
+    peerDependenciesMeta:
+      '@vite-pwa/assets-generator':
+        optional: true
+      magicast:
+        optional: true
+      rolldown:
+        optional: true
 
   '@vite-pwa/workbox-build@8.0.13':
     resolution: {integrity: sha512-4MF4p1hc+nVfcETXFo0HGVosmRaLZgIdhxhfPbLY51gG5YZFt/sEfznwSZdnjztDSLuTWJJryuMhBXh77RsGcw==}
@@ -4448,6 +4471,24 @@ snapshots:
       unconfig: 7.5.0
     transitivePeerDependencies:
       - '@types/node'
+
+  '@vite-pwa/vitepress@2.0.1(@vite-pwa/assets-generator@2.0.0)(rolldown@1.2.14)(typescript@6.0.3)(vite@8.3.4)(vitepress@https://pkg.pr.new/vitepress@b4079b6)':
+    dependencies:
+      '@unplugin-pwa/core': 0.0.2(@vite-pwa/assets-generator@2.0.0)(rolldown@1.2.14)(typescript@6.0.3)(vite@8.3.4)
+      '@unplugin-pwa/inspector': 0.0.2
+      '@unplugin-pwa/vite': 0.0.2(@vite-pwa/assets-generator@2.0.0)(rolldown@1.2.14)(typescript@6.0.3)(vite@8.3.4)
+      '@vite-pwa/workbox-build': 8.0.13(rolldown@1.2.14)(typescript@6.0.3)(vite@8.3.4)
+      '@vite-pwa/workbox-swkit': 8.0.13
+      '@vite-pwa/workbox-window': 8.0.13
+      vitepress: https://pkg.pr.new/vitepress@b4079b6(@types/node@24.19.1)(change-case@5.4.4)(jiti@2.7.0)(postcss@8.5.30)(typescript@6.0.3)(yaml@2.9.1)
+    optionalDependencies:
+      '@vite-pwa/assets-generator': 2.0.0(@types/node@24.19.1)
+      rolldown: 1.2.14
+    transitivePeerDependencies:
+      - '@rspack/core'
+      - typescript
+      - vite
+      - webpack
 
   '@vite-pwa/workbox-build@8.0.13(rolldown@1.2.14)(typescript@6.0.3)(vite@8.3.4)':
     dependencies:
