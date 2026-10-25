@@ -45,10 +45,10 @@ catalogs:
     eslint-plugin-antfu: ^3.2.3
 
   pwa:
-    '@unplugin-pwa/core': https://pkg.pr.new/@unplugin-pwa/core@f82589f
-    '@unplugin-pwa/inspector': https://pkg.pr.new/@unplugin-pwa/inspector@f82589f
-    '@unplugin-pwa/types': https://pkg.pr.new/@unplugin-pwa/types@f82589f
-    '@unplugin-pwa/vite': https://pkg.pr.new/@unplugin-pwa/vite@f82589f
+    '@unplugin-pwa/core': ^0.0.2
+    '@unplugin-pwa/inspector': ^0.0.2
+    '@unplugin-pwa/types': ^0.0.2
+    '@unplugin-pwa/vite': ^0.0.2
     '@vite-pwa/assets-generator': ^2.0.0
     '@vite-pwa/workbox-build': ^8.0.13
     '@vite-pwa/workbox-swkit': ^8.0.13
@@ -80,6 +80,10 @@ catalogs:
     vue-tsc: ^3.3.12
 
 minimumReleaseAgeExclude:
+  - '@unplugin-pwa/core'
+  - '@unplugin-pwa/inspector'
+  - '@unplugin-pwa/types'
+  - '@unplugin-pwa/vite'
   - '@vite-pwa/workbox-build'
   - '@vite-pwa/workbox-swkit'
   - '@vite-pwa/workbox-window'
