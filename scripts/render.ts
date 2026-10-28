@@ -234,6 +234,9 @@ export function renderPackageHTML(pkg: PackageGroup, options?: PackageOptions): 
 
     const desc = (s: ApiSymbol) => {
       const d = renderCommentShort(s.reflection.comment)
+        || (s.reflection.signatures ?? [])
+          .map((signature: any) => renderCommentShort(signature.comment))
+          .find(Boolean)
       return d ? ` ${htmlEscape(d)}` : ''
     }
 
