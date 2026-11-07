@@ -45,16 +45,16 @@ catalogs:
     eslint-plugin-antfu: ^3.2.3
 
   pwa:
-    '@unplugin-pwa/core': ^0.0.2
-    '@unplugin-pwa/inspector': ^0.0.2
-    '@unplugin-pwa/types': ^0.0.2
+    '@unplugin-pwa/core': ^0.0.4
+    '@unplugin-pwa/inspector': ^0.0.4
+    '@unplugin-pwa/types': ^0.0.4
     '@unplugin-pwa/vite': ^0.0.2
     '@vite-pwa/assets-generator': ^2.0.0
-    '@vite-pwa/vitepress': ^2.0.1
-    '@vite-pwa/workbox-build': ^8.0.13
-    '@vite-pwa/workbox-swkit': ^8.0.13
-    '@vite-pwa/workbox-types': ^8.0.13
-    '@vite-pwa/workbox-window': ^8.0.13
+    '@vite-pwa/vitepress': ^2.0.2
+    '@vite-pwa/workbox-build': ^8.0.14
+    '@vite-pwa/workbox-swkit': ^8.0.14
+    '@vite-pwa/workbox-types': ^8.0.14
+    '@vite-pwa/workbox-window': ^8.0.14
   types:
     '@types/node': 24.19.1
   typescript:
