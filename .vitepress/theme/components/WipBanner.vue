@@ -16,10 +16,10 @@ const visible = computed(() => {
 <template>
   <div
     v-if="visible"
-    class="wip-banner flex items-center gap-4 rounded-xl bg-amber-100/50 dark:bg-amber-900/20 border border-amber-300 dark:border-amber-700/50 text-amber-900 dark:text-amber-200 shadow-sm"
-    :class="home ? 'p-6 mt-8 max-w-4xl mx-auto' : 'p-4 mb-6'"
+    class="wip-banner flex flex-col sm:flex-row items-start sm:items-center gap-4 rounded-xl bg-amber-100/50 dark:bg-amber-900/20 border border-amber-300 dark:border-amber-700/50 text-amber-900 dark:text-amber-200 shadow-sm"
+    :class="home ? 'p-6 mt-8 mx-4 sm:mx-auto max-w-4xl' : 'p-4 mb-6'"
   >
-    <div class="text-3xl i-carbon:warning-hex flex-shrink-0" />
+    <div class="text-3xl i-carbon:warning-hex flex-shrink-0 mx-auto sm:mx-0" />
 
     <div class="flex-1">
       <p class="m-0 font-bold text-base">

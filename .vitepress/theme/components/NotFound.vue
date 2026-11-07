@@ -56,6 +56,7 @@ const isOfflineApi = computed(() => !!props.apiPageOffline)
           class="link"
           :href="withBase(apiPageOffline!)"
           aria-label="retry navigation"
+          target="_self"
         >
           <bdi>Try again</bdi>
         </a>
